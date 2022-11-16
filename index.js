@@ -7,7 +7,8 @@ app.get('/', (req, res) => {
     res.send('Port is working fine')
 })
 
-app.use(cors())
+app.use(cors());
+app.use(express.json());
 
 const users = [
     { id: 1, name: 'Helal', email: 'helal@gmail.com'},
@@ -17,6 +18,14 @@ const users = [
 
 app.get('/users', (req, res) => {
     res.send(users);
+})
+
+app.post('/users', (req, res) => {
+    const user = req.body;
+    user.id = users.length + 1;
+    users.push(user);
+    console.log(req.body);
+    res.send(user)
 })
 
 
